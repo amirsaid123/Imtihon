@@ -1,0 +1,28 @@
+version: "2.32.4"
+
+
+services:
+  bot:
+    build: .
+    image: anonim_bot:alpine
+    container_name: anonim_bot_con
+    restart: always
+    command: sh -c "python3 main.py"
+    depends_on:
+      - pg
+
+  pg:
+    image: postgres:alpine
+    container_name: p27_pg
+    restart: always
+    environment:
+      POSTGRES_PASSWORD: 1
+    ports:
+      - "5433:5432"
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+
+
+volumes:
+  pgdata:
+

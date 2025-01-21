@@ -1,0 +1,127 @@
+# English translations for PROJECT.
+# Copyright (C) 2025 ORGANIZATION
+# This file is distributed under the same license as the PROJECT project.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2025.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: PROJECT VERSION\n"
+"Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
+"POT-Creation-Date: 2025-01-21 21:40+0500\n"
+"PO-Revision-Date: 2025-01-21 21:40+0500\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language: en\n"
+"Language-Team: en <LL@li.org>\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.16.0\n"
+
+#: bot/functions/make_reply_button.py:13
+msgid "Back ◀️"
+msgstr ""
+
+#: bot/functions/make_reply_button.py:18
+msgid "🛑 Stop chat"
+msgstr ""
+
+#: bot/functions/make_reply_button.py:29
+msgid "Back 🔙"
+msgstr ""
+
+#: bot/handlers/main_router.py:32 bot/handlers/main_router.py:69
+#: bot/handlers/main_router.py:123 bot/handlers/main_router.py:179
+#: bot/handlers/main_router.py:239
+msgid "💫 Start chat"
+msgstr ""
+
+#: bot/handlers/main_router.py:33 bot/handlers/main_router.py:70
+#: bot/handlers/main_router.py:124 bot/handlers/main_router.py:180
+#: bot/handlers/main_router.py:227 bot/handlers/main_router.py:240
+msgid "💬 Comments and Offers"
+msgstr ""
+
+#: bot/handlers/main_router.py:34 bot/handlers/main_router.py:71
+#: bot/handlers/main_router.py:125 bot/handlers/main_router.py:181
+#: bot/handlers/main_router.py:241
+msgid "ℹ️ About bot"
+msgstr ""
+
+#: bot/handlers/main_router.py:35 bot/handlers/main_router.py:72
+#: bot/handlers/main_router.py:126 bot/handlers/main_router.py:182
+#: bot/handlers/main_router.py:228 bot/handlers/main_router.py:242
+msgid "🌐 Language 🇺🇸/🇺🇿/🇷🇺"
+msgstr ""
+
+#: bot/handlers/main_router.py:40
+msgid "Welcome to Anonymous chat bot!"
+msgstr ""
+
+#: bot/handlers/main_router.py:53
+msgid "Waiting for a partner..."
+msgstr ""
+
+#: bot/handlers/main_router.py:63
+msgid "Unfortunately, there are no other chats to connect 😕"
+msgstr ""
+
+#: bot/handlers/main_router.py:77
+msgid "Welcome Back to Anonymous chat bot!"
+msgstr ""
+
+#: bot/handlers/main_router.py:94
+msgid "Please, type your message here..."
+msgstr ""
+
+#: bot/handlers/main_router.py:131 bot/handlers/main_router.py:188
+#: bot/handlers/main_router.py:247
+msgid "Welcome back to the Main Menu 🏠"
+msgstr ""
+
+#: bot/handlers/main_router.py:153
+msgid ""
+"1️⃣.This bot is created to help people chat with each other anonymously 💭"
+"\n"
+"\n"
+"2️⃣.This bot keeps all information about user secret 👤\n"
+"\n"
+"3️⃣.Please, do not use any offensive or curse words while chatting! 🤬\n"
+"\n"
+"4️⃣.If you break the rules, your account will be banned permanently 🚫\n"
+"\n"
+"5️⃣.Happy chatting 🥂"
+msgstr ""
+
+#: bot/handlers/main_router.py:164
+msgid "Please type your comment below 💬. Press 'Back ◀️' to go to the main menu."
+msgstr ""
+
+#: bot/handlers/main_router.py:174
+msgid "Thank you for your comment 💬! Feel free to add another one 😁."
+msgstr ""
+
+#: bot/handlers/main_router.py:198
+msgid "Choose the preferred language"
+msgstr ""
+
+#: bot/handlers/main_router.py:224
+msgid "🔗 Referral link"
+msgstr ""
+
+#: bot/handlers/main_router.py:225
+msgid "👤 My Profile"
+msgstr ""
+
+#: bot/handlers/main_router.py:226
+msgid "💳 Withdraw Money"
+msgstr ""
+
+#: bot/handlers/main_router.py:232
+msgid "Language has been changed 😀"
+msgstr ""
+
+#: bot/handlers/main_router.py:234
+msgid "Invalid language selection. Please choose a valid language."
+msgstr ""
+
