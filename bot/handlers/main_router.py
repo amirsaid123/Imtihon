@@ -52,55 +52,73 @@ async def chat_handler(message: Message, state: FSMContext):
     keyboard = await make_stop_button()
     await message.answer(_("Waiting for a partner..."), reply_markup=keyboard)
 
+
 @main.message(ChatStates.waiting_for_partner, F.text != __("🛑 Stop chat"))
 async def partner_handler(message: Message, state: FSMContext):
     data = await state.get_data()
     session = await get_db_session()
-    users = await get_all_chats(session)
-    await session.close()
+    try:
+        users = await get_all_chats(session)
+        if not users:
+            await message.answer(_("Unfortunately, there are no other chats to connect 😕"))
+            locale = data.get('locale')
+            user_id = message.from_user.id
+            await state.clear()
+            await state.update_data(user_id=user_id, locale=locale)
+            main_menu = [
+                _("💫 Start chat"),
+                _("💬 Comments and Offers"),
+                _("ℹ️ About bot"),
+                _("🌐 Language 🇺🇸/🇺🇿/🇷🇺")
+            ]
+            adjust = [1, 2, 1]
+            keyboard = await make_reply_button(main_menu, adjust)
+            await message.answer(_("Welcome Back to Anonymous chat bot!"), reply_markup=keyboard)
+            return
 
-    if not users:
-        await message.answer(_("Unfortunately, there are no other chats to connect 😕"))
-        locale = data.get('locale')
-        user_id = message.from_user.id
-        await state.clear()
-        await state.update_data(user_id=user_id, locale=locale)
-        main_menu = [
-            _("💫 Start chat"),
-            _("💬 Comments and Offers"),
-            _("ℹ️ About bot"),
-            _("🌐 Language 🇺🇸/🇺🇿/🇷🇺")
-        ]
+        # Filter users that are available and have active status
+        available_users = [user.telegram_id for user in users if user.status]
+        if not available_users:
+            await message.answer(_("No one is available for a chat right now. Please try again later."))
+            return
 
-        adjust = [1, 2, 1]
-        keyboard = await make_reply_button(main_menu, adjust)
-        await message.answer(_("Welcome Back to Anonymous chat bot!"), reply_markup=keyboard)
+        random_user_id = random.choice(available_users)
+        await state.update_data(random=random_user_id)
+        await state.set_state(ChatStates.waiting_for_text)
+    finally:
+        await session.close()
 
-    user_ids = [user.telegram_id for user in users if user.status]
-    random_user_id = random.choice(user_ids)
-    await state.update_data(random=random_user_id)
-    await state.set_state(ChatStates.waiting_for_text)
 
 @main.message(ChatStates.waiting_for_text, F.text != __("🛑 Stop chat"))
 async def text_handler(message: Message, state: FSMContext):
     data = await state.get_data()
     user_id = data.get('user_id')
     random_user_id = data.get('random')
+
     session = await get_db_session()
-    await change_status(session, user_id)
-    await change_status(session, random_user_id)
-    await session.close()
+    try:
+        # Change status to indicate both users are in chat
+        await change_status(session, user_id)
+        await change_status(session, random_user_id)
+    finally:
+        await session.close()
 
     await message.answer(_("Please, type your message here..."))
-
     await state.set_state(ChatStates.waiting_for_message)
+
 
 @main.message(ChatStates.waiting_for_message)
 async def message_handler(message: Message, state: FSMContext):
     data = await state.get_data()
     random_user_id = data.get('random')
     user_message = message.text
-    await message.bot.send_message(random_user_id,  user_message)
+
+    try:
+        await message.bot.send_message(random_user_id, user_message)
+    except Exception as e:
+        # Handle any potential errors when sending a message
+        await message.answer(_("Failed to send your message. Please try again later."))
+        return
 
 
 @main.message(ChatStates.waiting_for_partner, F.text == __("🛑 Stop chat"))

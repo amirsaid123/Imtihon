@@ -3,7 +3,7 @@ import aiofiles
 
 
 async def save_comment(user_info, comment):
-    async with aiofiles.open("D:\Imtihon\comments.json", "r", encoding="utf-8") as f:
+    async with aiofiles.open("/home/amirsaid/PycharmProjects/Anonim_chat/comments.json", "r", encoding="utf-8") as f:
         contents = await f.read()
         comments_data = json.loads(contents)
 
@@ -14,6 +14,6 @@ async def save_comment(user_info, comment):
         "comment": comment
     })
 
-    async with aiofiles.open("D:\Imtihon\comments.json", "w", encoding="utf-8") as file:
+    async with aiofiles.open("/home/amirsaid/PycharmProjects/Anonim_chat/comments.json", "w", encoding="utf-8") as file:
         await file.write(json.dumps(comments_data, ensure_ascii=False, indent=4))
 
